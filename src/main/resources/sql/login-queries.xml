@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Login">
+	<select id="check" parameterType="MemberModel" resultType="int">
+		SELECT count(*) FROM member22 where nickname = #{nickname} AND password = #{password}
+	</select>
+	<select id="checkNickname" parameterType="String" resultType="int">
+		SELECT count(*) FROM member22 where nickname = #{nickname}
+	</select>
+	<insert id="insertMember" parameterType="MemberModel">
+		INSERT INTO member22(nickname, password, email) VALUES(#{nickname}, #{password}, #{email})
+	</insert>
+</mapper>
