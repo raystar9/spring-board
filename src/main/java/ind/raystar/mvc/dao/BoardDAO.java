@@ -11,13 +11,22 @@ import ind.raystar.mvc.dto.PostSelectDTO;
  */
 public interface BoardDAO {
 	public int selectListCount();
-	public int getListCountWithSearchQuery(PostSelectDTO postSelect);
+
+	public int selectListCountWithSearchQuery(PostSelectDTO postSelect);
+
 	public List<PostDTO> selectPosts(PostSelectDTO postSelect);
+
 	public List<PostDTO> selectPostsWithSearchQuery(PostSelectDTO postSelect);
+
 	public PostDTO selectPost(int postNo);
+
 	public void insertPost(PostDTO post);
+
 	public void updatePost(PostDTO post);
-	public void addReadCount(int postNo);
+
+	public void updateReadCount(int postNo);
+
 	public void deletePost(int postNo);
+
 	public String selectRepFileName(int postNo);
 }

@@ -20,19 +20,19 @@ public class BoardDAOFake implements BoardDAO {
 	List<PostDTO> posts = new ArrayList<>();
 	Logger logger = LoggerFactory.getLogger(BoardDAOFake.class);
 	private int index = 0;
-	
+
 	@Autowired
 	public void BoardDaoFake() {
 		initPosts();
 	}
-	
+
 	private void initPosts() {
-		
-		for(int i = 1; i < 120; i++) {
+
+		for (int i = 1; i < 120; i++) {
 			PostDTO post = new PostDTO();
 			post.setId(i);
 			post.setPostNo(i);
-			switch(i % 3) {
+			switch (i % 3) {
 			case 0:
 				post.setWriter("koo");
 				break;
@@ -43,7 +43,7 @@ public class BoardDAOFake implements BoardDAO {
 				post.setWriter("star");
 				break;
 			}
-			
+
 			post.setTitle(i + "번째 글의 제목");
 			post.setContent(i + "번째 글의 내용입니다.");
 			post.setReadCount(0);
@@ -51,7 +51,7 @@ public class BoardDAOFake implements BoardDAO {
 			index++;
 		}
 	}
-	
+
 	@Override
 	public int selectListCount() {
 		return posts.size();
@@ -72,52 +72,55 @@ public class BoardDAOFake implements BoardDAO {
 		int endPost = postSelect.getEnd();
 		return getListWithBoundary(getSearchedList(searchBy, query), startPost, endPost);
 	}
-	private List<PostDTO> getSearchedList(String searchBy, String query){
+
+	private List<PostDTO> getSearchedList(String searchBy, String query) {
 		List<PostDTO> results = new ArrayList<>();
 		PostDTO post;
-		switch(searchBy) {
-			case "writer":
-				for(int i = 0; i < posts.size(); i++) {
-					post = posts.get(i);
-					if(post.getWriter().contains(query)) {
-						results.add(post);
-					}
+		switch (searchBy) {
+		case "writer":
+			for (int i = 0; i < posts.size(); i++) {
+				post = posts.get(i);
+				if (post.getWriter().contains(query)) {
+					results.add(post);
 				}
-				break;
-			case "title":
-				for(int i = 0; i < posts.size(); i++) {
-					post = posts.get(i);
-					if(post.getTitle().contains(query)) {
-						results.add(post);
-					}
+			}
+			break;
+		case "title":
+			for (int i = 0; i < posts.size(); i++) {
+				post = posts.get(i);
+				if (post.getTitle().contains(query)) {
+					results.add(post);
 				}
-				break;
-			case "content":
-				for(int i = 0; i < posts.size(); i++) {
-					post = posts.get(i);
-					if(post.getContent().contains(query)) {
-						results.add(post);
-					}
+			}
+			break;
+		case "content":
+			for (int i = 0; i < posts.size(); i++) {
+				post = posts.get(i);
+				if (post.getContent().contains(query)) {
+					results.add(post);
 				}
-				break;
+			}
+			break;
 		}
-		
+
 		return results;
 	}
-	private List<PostDTO> getListWithBoundary(List<PostDTO> list, int start, int end){
+
+	private List<PostDTO> getListWithBoundary(List<PostDTO> list, int start, int end) {
 		List<PostDTO> result = new ArrayList<>();
-		int startPost = list.size()- start - 1;
-		int endPost = list.size()- end;
-		logger.debug(startPost + " to " +endPost);
-		for(int i = startPost; i >= endPost; i--) {
+		int startPost = list.size() - start - 1;
+		int endPost = list.size() - end;
+		logger.debug(startPost + " to " + endPost);
+		for (int i = startPost; i >= endPost; i--) {
 			result.add(list.get(i));
 		}
 		return result;
 	}
+
 	@Override
 	public PostDTO selectPost(int postNo) {
-		for(int i = 0; i < posts.size(); i++) {
-			if(posts.get(i).getPostNo() == postNo) {
+		for (int i = 0; i < posts.size(); i++) {
+			if (posts.get(i).getPostNo() == postNo) {
 				return posts.get(i);
 			}
 		}
@@ -136,7 +139,7 @@ public class BoardDAOFake implements BoardDAO {
 	}
 
 	@Override
-	public void addReadCount(int postNo) {
+	public void updateReadCount(int postNo) {
 		PostDTO post = selectPost(postNo);
 		post.setReadCount(post.getReadCount() + 1);
 	}
@@ -153,7 +156,7 @@ public class BoardDAOFake implements BoardDAO {
 	}
 
 	@Override
-	public int getListCountWithSearchQuery(PostSelectDTO postSelect) {
+	public int selectListCountWithSearchQuery(PostSelectDTO postSelect) {
 		String searchBy = postSelect.getSearchBy();
 		String query = postSelect.getQuery();
 		return getSearchedList(searchBy, query).size();

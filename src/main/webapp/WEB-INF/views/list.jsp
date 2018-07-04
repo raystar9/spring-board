@@ -22,7 +22,7 @@
 	<c:forEach items="${posts}" var="post">
 	<tr>
 		<td class="text-center">${post.postNo}</td>
-		<td><a href="board/post?postno=${post.postNo}">${post.title}</a></td>
+		<td><a href="board/${post.postNo}">${post.title}</a></td>
 		<td>${post.writer}</td>
 		<td class="text-center">${post.readCount}</td>
 	</tr>

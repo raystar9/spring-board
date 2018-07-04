@@ -7,13 +7,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ind.raystar.mvc.dto.MySession;
 
-public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
+public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String id = ((MySession)request.getSession().getAttribute("mySession")).getId();
-		if(id == null) {
+		String id = ((MySession) request.getSession().getAttribute("mySession")).getId();
+		if (id == null) {
 			request.getRequestDispatcher("/WEB-INF/views/alert/not-logged-in.jsp").forward(request, response);
 			return false;
 		} else {

@@ -3,7 +3,7 @@ package ind.raystar.mvc.dto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Scope(value="session")
+@Scope(value = "session")
 @Component("mySession")
 public class MySession {
 	private String id;
@@ -15,5 +15,5 @@ public class MySession {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 }

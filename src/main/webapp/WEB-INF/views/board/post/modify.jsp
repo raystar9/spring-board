@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/global/top-navbar.jsp"/>
 <div class="container">
-<form:form action="/mvc/board/post" method="put" autocomplete="off">
+<f:form action="/mvc/board/${post.postNo}" method="put" autocomplete="off" modelAttribute="post">
 <table class="table table-bordered">
 	<tr>
 		<th colspan=2>글 수정하기</th>
@@ -21,15 +21,15 @@
 	</tr>
 	<tr>
 		<td><label for="title">글 제목</label></td>
-		<td><input class="form-control" type="text" name="title" id="title" value="${post.title}"/></td>
+		<td><f:input class="form-control" path="title"/></td>
 	</tr>
 	<tr>
-		<td colspan=2><textarea class="form-control" name="content" id="content" cols="30" rows="10" >${post.content}</textarea></td>
+		<td colspan=2><f:textarea class="form-control" path="content" cols="30" rows="10" /></td>
 	</tr>
 </table>
-<input type="hidden" name="postNo" value="${post.postNo}" />
+<f:hidden path="writer" />
 <input class="btn btn-default" type="submit" value="수정하기"/>
-</form:form>
+</f:form>
 </div>
 </body>
 </html>

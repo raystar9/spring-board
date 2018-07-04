@@ -13,16 +13,17 @@ public class LoginService {
 
 	@Autowired
 	private LoginDAO loginDAO;
-	
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	public int checkNickname(String nickname) {
 		return loginDAO.checkNickname(nickname);
 	}
-	
+
 	public int checkLogin(MemberDTO memberModel) {
 		return loginDAO.checkLogin(memberModel);
 	}
-	
+
 	public int insertMember(MemberDTO memberModel) {
 		return loginDAO.insertMember(memberModel);
 	}

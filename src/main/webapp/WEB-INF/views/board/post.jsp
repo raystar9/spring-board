@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 	<c:if test="${post.attachment!=null}">
 	<tr>
 		<td>첨부파일</td>
-		<td><a href="/mvc/board/post/download?postno=${post.postNo}">${post.attachment}</a></td>
+		<td><a href="/mvc/board/${post.postNo}/download">${post.attachment}</a></td>
 	</tr>
 	</c:if>
 	<tr>
@@ -39,19 +40,16 @@
 			<div class="col-sm-9"></div>
 			<div class="col-sm-1">
 			<c:if test="${mySession.id == post.writer}">
-			<form action="post/modify" method="post">
-				<input type="hidden" name="postno" value="${post.postNo}" />
-				<input class="btn btn-default" type="submit" value="수정"/>
-			</form>
+			<button class="btn btn-default" onclick="location.href='/mvc/board/${post.postNo}/modify'">수정</button>
 			</c:if>
 			</div>
 			<div class="col-sm-1">
 			<c:if test="${mySession.id == post.writer}">
-			<form action="delete" method="post" id="delete-form">
+			<f:form method="delete" id="delete-form">
 				<input type="hidden" name="method" value="delete" />
 				<input type="hidden" name="postno" value="${post.postNo}" />
 				<input class="btn btn-danger" type="button" value="삭제" onclick="deleteConfirm();"/>
-			</form>
+			</f:form>
 			</c:if>
 			</div>
 			<div class="col-sm-1">

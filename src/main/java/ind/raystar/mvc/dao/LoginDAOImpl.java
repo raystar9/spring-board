@@ -9,14 +9,14 @@ import ind.raystar.mvc.dto.MemberDTO;
 
 //@Repository("LoginDAO")
 public class LoginDAOImpl implements LoginDAO {
-	
+
 	@Autowired
 	SqlSessionFactory sqlSession;
 
 	private SqlSession getSession() {
 		return sqlSession.openSession();
 	}
-	
+
 	@Override
 	public int checkNickname(String nickname) {
 		SqlSession session = getSession();
