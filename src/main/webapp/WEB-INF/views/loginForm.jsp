@@ -9,6 +9,7 @@
 <jsp:include page="/WEB-INF/views/global/top-navbar.jsp"/>
 <div class="container">
 <form method="post" action="./login"  autocomplete="off">
+<h2>기본 계정: scott/tiger</h2>
 	<table class="table table-bordered">
 		<tr>
 			<td>ID</td><td><input class="form-control" type="text" name="nickname"></td>
