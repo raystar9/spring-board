@@ -19,11 +19,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import ind.raystar.mvc.dto.MySession;
 import ind.raystar.mvc.dto.PostDTO;
 import ind.raystar.mvc.service.BoardService;
-import ind.raystar.mvc.service.RealBoardService;
+import ind.raystar.mvc.service.FakeBoardService;
 
 @Controller
 @SessionAttributes("mySession")
-public class BoardController {
+public class FakeBoardController {
 
 	/*
 	 * Controller는 
@@ -32,79 +32,79 @@ public class BoardController {
 	 * 3. 요청에 맞는 view(.jsp파일)와 연결 의 역할을 한다.
 	 */
 	@Autowired
-	private RealBoardService realBoardService;
+	private FakeBoardService fakeBoardService;
 	BoardService boardService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(FakeBoardController.class);
 
-	@RequestMapping(value = "board")
-	public String boardList(Model model, @RequestParam(name = "page", defaultValue = "1") String pageParam,
+	@RequestMapping(value = "fake/board")
+	public String boardListFake(Model model, @RequestParam(name = "page", defaultValue = "1") String pageParam,
 			@RequestParam(required = false) String query,
 			@RequestParam(name = "searchby", required = false) String searchBy, MySession mySession) {
 		int page = Integer.parseInt(pageParam);
 
 		logger.debug(mySession.getId());
 
-		model.addAttribute("posts", realBoardService.getPosts(page, searchBy, query));
+		model.addAttribute("posts", fakeBoardService.getPosts(page, searchBy, query));
 		model.addAttribute("page", page);
 		model.addAttribute("searchBy", searchBy);
 		model.addAttribute("query", query);
-		model.addAttribute("pageSelectInfo", realBoardService.getInfo(page, searchBy, query));
+		model.addAttribute("pageSelectInfo", fakeBoardService.getInfo(page, searchBy, query));
 		return "list";
 	}
 
 	/*
 	 * RequestMapping의 value값과 return값이 일치한다면 반환형을 void로 해도 같은 결과를 얻을 수 있다.
 	 */
-	@RequestMapping(value = "board/{postNo}")
-	public String postPost(Model model, @PathVariable() int postNo, MySession mySession) {
+	@RequestMapping(value = "fake/board/{postNo}")
+	public String postPostFake(Model model, @PathVariable() int postNo, MySession mySession) {
 		logger.debug(mySession.getId());
-		model.addAttribute("post", realBoardService.getPostDetail(postNo));
+		model.addAttribute("post", fakeBoardService.getPostDetail(postNo));
 		return "board/post";
 	}
 
-	@RequestMapping(value = "board/{postNo}", method = RequestMethod.PUT)
-	public String putPost(Model model, PostDTO post) {
-		realBoardService.updatePost(post);
+	@RequestMapping(value = "fake/board/{postNo}", method = RequestMethod.PUT)
+	public String putPostFake(Model model, PostDTO post) {
+		fakeBoardService.updatePost(post);
 		model.addAttribute("post", post);
-		return "redirect:/board/" + post.getPostNo();
+		return "redirect:/fake/board/" + post.getPostNo();
 	}
 
-	@RequestMapping(value = "board/{postNo}/download", method = RequestMethod.GET)
-	public void downloadFile(HttpServletRequest request, HttpServletResponse response, @PathVariable() int postNo)
+	@RequestMapping(value = "fake/board/{postNo}/download", method = RequestMethod.GET)
+	public void downloadFileFake(HttpServletRequest request, HttpServletResponse response, @PathVariable() int postNo)
 			throws Exception {
 		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		realBoardService.downloadFile(postNo, rootPath, response);
+		fakeBoardService.downloadFile(postNo, rootPath, response);
 	}
 
-	@RequestMapping(value = "board/new")
-	public String boardNew(Model model, MySession mySession) {
+	@RequestMapping(value = "fake/board/new")
+	public String boardNewFake(Model model, MySession mySession) {
 		model.addAttribute("sessionId", mySession.getId());
 		return "board/new";
 	}
 
-	@RequestMapping(value = "board/new", method = RequestMethod.POST)
-	public String boardNewInsert(@RequestParam String title, @RequestParam String content,
+	@RequestMapping(value = "fake/board/new", method = RequestMethod.POST)
+	public String boardNewInsertFake(@RequestParam String title, @RequestParam String content,
 			@RequestParam MultipartFile multipartFile, MultipartHttpServletRequest request, MySession mySession)
 			throws Exception {
 		String rootPath = request.getSession().getServletContext().getRealPath("/");
 
 		logger.debug(rootPath);
-		realBoardService.writePost(title, content, mySession, rootPath, multipartFile);
+		fakeBoardService.writePost(title, content, mySession, rootPath, multipartFile);
 
-		return "redirect:/board";
+		return "redirect:/fake/board";
 	}
 
-	@RequestMapping(value = "board/{postNo}/modify", method = RequestMethod.GET)
-	public String boardModify(Model model, @PathVariable int postNo) {
+	@RequestMapping(value = "fake/board/{postNo}/modify", method = RequestMethod.GET)
+	public String boardModifyFake(Model model, @PathVariable int postNo) {
 		// int postNo = Integer.parseInt(postNo);
-		model.addAttribute("post", realBoardService.selectPost(postNo));
+		model.addAttribute("post", fakeBoardService.selectPost(postNo));
 		return "board/post/modify";
 	}
 
-	@RequestMapping(value = "board/{postNo}", method = RequestMethod.DELETE)
-	public String boardDelete(@RequestParam("postno") int postNo) {
-		realBoardService.deletePost(postNo);
-		return "redirect:/board";
+	@RequestMapping(value = "fake/board/{postNo}", method = RequestMethod.DELETE)
+	public String boardDeleteFake(@RequestParam("postno") int postNo) {
+		fakeBoardService.deletePost(postNo);
+		return "redirect:/fake/board";
 	}
 }

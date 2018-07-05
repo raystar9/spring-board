@@ -5,14 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ind.raystar.mvc.dao.LoginDAO;
+import ind.raystar.mvc.dao.LoginDAOFake;
 import ind.raystar.mvc.dto.MemberDTO;
 
 @Service
 public class LoginService {
 
 	@Autowired
-	private LoginDAO loginDAO;
+	private LoginDAOFake loginDAO;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 

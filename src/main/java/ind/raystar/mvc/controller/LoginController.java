@@ -51,7 +51,7 @@ public class LoginController {
 		switch (loginService.checkLogin(memberModel)) {
 		case 1:
 			mySession.setId(memberModel.getNickname());
-			return "redirect:/board";
+			return "redirect:/fake/board";
 		case 0:
 		default:
 			return "alert/login-error";

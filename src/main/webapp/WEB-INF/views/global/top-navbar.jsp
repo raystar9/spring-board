@@ -5,11 +5,11 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/mvc/board">게시판</a>
+			<a class="navbar-brand" href="#">듀얼코어</a>
 		</div>
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
+				<li><a href="/mvc/board">오라클 게시판</a></li>
+				<li><a href="/mvc/fake/board">자바 게시판</a></li>
 			</ul>
 			<c:if test="${mySession.id == null }">
 				<ul class="nav navbar-nav navbar-right">

@@ -14,7 +14,7 @@ import ind.raystar.mvc.dto.PostSelectDTO;
  * BoardDAOFake의 @Repository annotation에 주석처리하고,
  * 이 클래스의 @Repository의 주석을 해제를 하면 실제 OracleDB와 연결이 가능하다.
  */
-//@Repository("BoardDAO")
+@Repository("boardDAOImpl")
 public class BoardDAOImpl implements BoardDAO {
 
 	/*

@@ -14,6 +14,8 @@
 		 <interceptor>
 		 	<mapping path="/board/new"/>
 		 	<mapping path="/board/modify"/>
+		 	<mapping path="/fake/board/new"/>
+		 	<mapping path="/fake/board/modify"/>
 		 	<beans:bean class="ind.raystar.mvc.interceptor.LoginCheckInterceptor"/>
 		 </interceptor>
 	</interceptors>

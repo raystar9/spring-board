@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import ind.raystar.mvc.dto.PostDTO;
 import ind.raystar.mvc.dto.PostSelectDTO;
 
-@Repository("BoardDAO")
+@Repository("boardDAOFake")
 public class BoardDAOFake implements BoardDAO {
 
 	/*

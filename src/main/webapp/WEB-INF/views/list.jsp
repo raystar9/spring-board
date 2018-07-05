@@ -31,12 +31,12 @@
 <div class="container">
 	<div class="row">
 	<div class="col-sm-2">
-		<input type="button" value="처음" class="btn btn-default" onclick="location.href='/mvc/board'"/>
+		<input type="button" value="처음" class="btn btn-default" onclick="location.href='./board'"/>
 	</div>
 	<div class="col-sm-8 text-center">
 	<ul class="pagination">
 	<c:if test="${pageSelectInfo.start != 1 }">
-		<li> <a href="/mvc/board?page=${pageSelectInfo.start - 1}">이전</a> </li>
+		<li> <a href="?page=${pageSelectInfo.start - 1}">이전</a> </li>
 	</c:if>
 	
 		<c:forEach begin="${pageSelectInfo.start}" end="${pageSelectInfo.end}" varStatus="pageSelector">
@@ -46,7 +46,7 @@
 					<li class="active"> <a href='#'>${pageSelector.index}</a> </li>
 				</c:if>
 				<c:if test="${pageSelectInfo.current != pageSelector.index }">
-					<li> <a href='/mvc/board?page=${pageSelector.index}&searchby=${searchBy}&query=${query}'>${pageSelector.index}</a> </li>
+					<li> <a href='?page=${pageSelector.index}&searchby=${searchBy}&query=${query}'>${pageSelector.index}</a> </li>
 				</c:if>
 			</c:if>
 			<c:if test="${!((query != null) && (searchBy != null))}">
@@ -54,17 +54,17 @@
 					<li class="active"> <a href='#'>${pageSelector.index}</a> </li>
 				</c:if>
 				<c:if test="${pageSelectInfo.current != pageSelector.index }">
-					<li> <a href='/mvc/board?page=${pageSelector.index}'>${pageSelector.index}</a> </li>				
+					<li> <a href='?page=${pageSelector.index}'>${pageSelector.index}</a> </li>				
 				</c:if>
 			</c:if>
 		</c:forEach>
 	<c:if test="${pageSelectInfo.end != pageSelectInfo.last}">
-		<li> <a href="/mvc/board?page=${pageSelectInfo.end + 1}">다음</a> </li>
+		<li> <a href="?page=${pageSelectInfo.end + 1}">다음</a> </li>
 	</c:if>
 	</ul>
 	</div>
 	<div class="col-sm-2">
-		<input type="button" class="btn btn-default" value="글쓰기" onclick="location.href='board/new'" />
+		<input type="button" class="btn btn-default" value="글쓰기" onclick="location.href='./board/new'" />
 	</div>
 	</div>
 	<form>

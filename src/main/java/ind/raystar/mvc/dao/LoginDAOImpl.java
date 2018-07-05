@@ -3,11 +3,13 @@ package ind.raystar.mvc.dao;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import ind.raystar.mvc.dto.MemberDTO;
 
-//@Repository("LoginDAO")
+@Repository
+@Qualifier("LoginDAOImpl")
 public class LoginDAOImpl implements LoginDAO {
 
 	@Autowired

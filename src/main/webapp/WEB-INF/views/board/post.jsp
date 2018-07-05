@@ -30,7 +30,7 @@
 	<c:if test="${post.attachment!=null}">
 	<tr>
 		<td>첨부파일</td>
-		<td><a href="/mvc/board/${post.postNo}/download">${post.attachment}</a></td>
+		<td><a href="./${post.postNo}/download">${post.attachment}</a></td>
 	</tr>
 	</c:if>
 	<tr>
@@ -40,7 +40,7 @@
 			<div class="col-sm-9"></div>
 			<div class="col-sm-1">
 			<c:if test="${mySession.id == post.writer}">
-			<button class="btn btn-default" onclick="location.href='/mvc/board/${post.postNo}/modify'">수정</button>
+			<button class="btn btn-default" onclick="location.href='./${post.postNo}/modify'">수정</button>
 			</c:if>
 			</div>
 			<div class="col-sm-1">
@@ -53,7 +53,7 @@
 			</c:if>
 			</div>
 			<div class="col-sm-1">
-			<input class="btn btn-default" type="button" onclick="location.href='/mvc/board';" value="뒤로" />
+			<input class="btn btn-default" type="button" onclick="location.href='./';" value="뒤로" />
 			</div>
 			</div>
 		</div>
